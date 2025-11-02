@@ -5,11 +5,11 @@ function App() {
         <h1 className="text-6xl font-serif text-primary-gold mb-4">
           La Crème
         </h1>
-        <p className="text-xl text-accent-white">
+        <p className="text-xl text-accent-white mb-2">
           Elegant French Dining Experience
         </p>
         <p className="text-sm text-accent-white/60 mt-8">
-          Coming Soon
+          Foundation components in development
         </p>
       </div>
     </div>
