@@ -1,19 +1,19 @@
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--color-primary-black)' }}>
+    <div className="min-h-screen bg-primary-black flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-6xl mb-4" style={{ fontFamily: 'var(--font-family-serif)', color: 'var(--color-primary-gold)' }}>
+        <h1 className="text-6xl font-serif text-primary-gold mb-4">
           La Crème
         </h1>
-        <p className="text-xl mb-8" style={{ color: 'var(--color-accent-white)', fontFamily: 'var(--font-family-sans)' }}>
-          Tailwind v4 is working! 🎉
+        <p className="text-xl text-accent-white">
+          Elegant French Dining Experience
         </p>
-        <button className="btn btn-primary">
-          Reserve a Table
-        </button>
+        <p className="text-sm text-accent-white/60 mt-8">
+          Coming Soon
+        </p>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
