@@ -2,6 +2,7 @@ import Layout from "./components/layout/Layout";
 import HeroSection from "./components/sections/HeroSection";
 import MenuSection from "./components/sections/MenuSection";
 import GallerySection from "./components/sections/GallerySection";
+import ContactSection from "./components/sections/ContactSection";
 import ReservationForm from "./components/reservation/ReservationForm/ReservationForm";
 import { PreOrderProvider } from "./context/PreOrderContext";
 
@@ -19,25 +20,15 @@ function App() {
         {/* Gallery Section */}
         <GallerySection />
 
+        {/* Contact Section */}
+        <ContactSection />
+
         {/* Reservations Section */}
-        <section id="reservations" className="section bg-accent-gray">
+        <section id="reservation" className="section">
           <div className="container-narrow">
             <h2 className="section-title">Make a Reservation</h2>
             <div className="divider" />
-            <p className="section-subtitle">
-              Reserve your table for an unforgettable dining experience
-            </p>
             <ReservationForm />
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="section bg-primary-black pb-20">
-          <div className="container-custom">
-            <h2 className="section-title">Contact Us</h2>
-            <p className="section-subtitle">
-              Get in touch with us for inquiries and special requests
-            </p>
           </div>
         </section>
       </div>
