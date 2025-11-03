@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useReservation } from '@hooks/useReservation';
-import { usePreOrder } from '@/context/PreOrderContext';
+import { usePreOrder } from '@/hooks/usePreOrder';
 
 const ReservationForm = () => {
   // Form state

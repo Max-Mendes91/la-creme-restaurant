@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Create the context
@@ -94,16 +94,5 @@ PreOrderProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-/**
- * Custom hook to use PreOrderContext
- * Throws error if used outside of PreOrderProvider
- */
-export const usePreOrder = () => {
-  const context = useContext(PreOrderContext);
-
-  if (context === undefined) {
-    throw new Error('usePreOrder must be used within a PreOrderProvider');
-  }
-
-  return context;
-};
+// Export context for use in custom hook
+export { PreOrderContext };

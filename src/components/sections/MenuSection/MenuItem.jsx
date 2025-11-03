@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { usePreOrder } from '@/context/PreOrderContext';
+import { usePreOrder } from '@/hooks/usePreOrder';
 import Button from '@/components/common/Button/Button';
 
 const MenuItem = ({ item }) => {
