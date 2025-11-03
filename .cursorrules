@@ -1,0 +1,304 @@
+# La Crème Restaurant - Project Context
+
+## Project Info
+
+Name: La Crème (upscale French restaurant landing page)
+Repo: https://github.com/Max-Mendes91/la-creme-restaurant
+Live: https://la-creme-restaurant.vercel.app/
+
+## Tech Stack
+
+React 18 + Vite
+Tailwind CSS v4.1.16 - CRITICAL: Uses @theme directive NOT @tailwind directives
+EmailJS for reservation system - @emailjs/browser package
+Deployed on Vercel with auto-deploy on push to main
+
+## Reservation Backend
+
+Using EmailJS (email-based reservations)
+Service ID: service_dqr6yyc
+Template ID: template_zohrjop
+Public Key stored in environment variables
+NEVER commit API keys - use .env.local only
+
+## Environment Variables
+
+VITE*EMAILJS_PUBLIC_KEY - stored in .env.local NOT committed
+VITE_EMAILJS_SERVICE_ID - stored in .env.local NOT committed
+VITE_EMAILJS_TEMPLATE_ID - stored in .env.local NOT committed
+.env.example committed as template for setup reference
+Always use import.meta.env.VITE* prefix for Vite projects
+
+## Design System Colors
+
+bg-primary-black: #0a0a0a (main background)
+bg-primary-gold: #d4af37 (CTA and accents)
+bg-primary-cream: #f5f5dc (soft highlights)
+bg-primary-gold-light: #e8c468
+bg-primary-gold-dark: #b8941f
+bg-accent-white: #fafafa (text)
+bg-accent-gray: #1a1a1a (cards)
+bg-accent-gray-light: #2a2a2a
+
+## Typography
+
+font-serif: Playfair Display (for headings)
+font-sans: Inter (for body text)
+
+## Component Classes in src/index.css
+
+Buttons: .btn .btn-primary .btn-secondary .btn-ghost .btn-sm .btn-lg
+Forms: .input .label .error-message
+Cards: .card .card-hover
+Sections: .section .section-title .section-subtitle
+Containers: .container-custom .container-narrow
+Overlays: .overlay .overlay-gradient
+
+## Path Aliases
+
+@/ maps to src/
+@components/ maps to src/components/
+@hooks/ maps to src/hooks/
+@services/ maps to src/services/
+@utils/ maps to src/utils/
+@constants/ maps to src/constants/
+
+## Folder Structure
+
+src/components/common/ - Reusable UI (Button Input Modal LoadingSpinner)
+src/components/layout/ - Header Footer Layout wrapper
+src/components/sections/ - Hero Menu Gallery Reservation Contact
+src/components/reservation/ - Form DatePicker TimePicker ContactFields
+src/pages/ - Home NotFound
+src/hooks/ - Custom React hooks like useReservation
+src/services/api/ - API client reservations.js with EmailJS integration
+src/utils/ - Helper functions like validation
+src/constants/ - Menu data config
+src/assets/ - Images icons
+
+## Services Structure
+
+src/services/api/reservations.js - EmailJS integration with submitReservation function
+Validates required fields: name email phone date time guests
+Returns success object with reservationId or throws error
+All API errors caught and returned as user-friendly messages
+
+## Custom Hooks
+
+src/hooks/useReservation.js - Manages reservation state
+Returns: makeReservation isLoading error success reset
+Handles API calls loading states error handling success states
+Used in reservation form components
+
+## Development Rules
+
+1. Mobile-first approach: design for 375px then enhance to 768px and 1024px
+2. Accessibility is required: WCAG 2.1 AA keyboard navigation ARIA labels
+3. Use component classes from index.css NOT heavy inline Tailwind
+4. Conventional commits: feat: fix: style: refactor: docs: chore:
+5. Test on mobile after building each component
+6. Use PropTypes for all components
+7. Create index.js in component folders for clean imports
+8. Never commit .env.local or API keys
+9. Always validate form inputs before API calls
+10. Show loading states during API calls
+11. Show clear error messages on failures
+12. Show success confirmations on success
+
+## Tailwind v4 Critical Rules
+
+Use @import "tailwindcss" NOT @tailwind base/components/utilities
+Theme config in CSS with @theme directive NOT in tailwind.config.js
+Avoid @apply - write CSS directly using CSS variables
+Component classes go in @layer components block
+
+## Git Workflow
+
+main branch is production - always deployable
+develop branch is integration - test features together
+feature/\* branches for new work - always branch from develop
+Always create PR from feature to develop then develop to main
+
+## Current Status
+
+Foundation complete: Tailwind v4 custom theme deployed
+GitHub and Vercel setup complete
+EmailJS integration added for reservation system
+Environment variables configured securely
+Reservation service and useReservation hook created
+Currently working on: Testing EmailJS integration then building full reservation form
+
+## Next Tasks in Order
+
+1. Test EmailJS integration with simple form
+2. Build complete Button component with all variants if not done
+3. Build Input component with validation states
+4. Build DatePicker and TimePicker components
+5. Build full ReservationForm component with validation
+6. Build Header component with sticky scroll effect
+7. Build Hero section with animations and CTA
+8. Build Menu section with category filtering
+9. Build Gallery section with modal lightbox
+10. Build Contact section with map integration
+
+## Reservation Form Requirements
+
+Required fields: name email phone date time guests
+Optional field: specialRequests
+Email validation regex pattern
+Phone validation for format
+Date must be future date not past
+Time validation for restaurant hours
+Guest count between 1 and 20
+Real-time validation as user types
+Show field-level errors not just form-level
+Clear success message after submission
+Disable form during loading
+Reset form after success
+Handle network errors gracefully
+
+## Component Building Checklist
+
+- Use component classes from index.css
+- Add PropTypes validation
+- Make mobile-responsive with Tailwind breakpoints
+- Test keyboard navigation and focus states
+- Add ARIA labels where needed
+- Export via index.js for clean imports
+- Test all variants and states
+- Handle loading and error states for async operations
+- Commit with clear conventional commit message
+
+## Security Best Practices
+
+Never commit API keys or secrets
+Always use environment variables for sensitive data
+Validate all user inputs on frontend
+Sanitize data before sending to APIs
+Use HTTPS only (Vercel provides this)
+Never expose backend endpoints in frontend code
+
+## Important Files
+
+PROJECT.md - full architecture and user stories
+FOLDER_STRUCTURE.md - complete folder organization guide
+src/index.css - all component classes and theme configuration
+vite.config.js - path aliases configuration
+tailwind.config.js - minimal config for v4
+.env.local - environment variables NOT committed
+.env.example - template for environment setup committed to repo
+
+## When I Ask You To Build Components
+
+Always use Tailwind v4 syntax with CSS variables
+Follow the folder structure exactly
+Use atomic design principles - small reusable pieces
+Include PropTypes validation on all props
+Make everything mobile-responsive
+Test accessibility features
+Use component classes from index.css first before adding custom styles
+Create barrel exports with index.js files
+For forms handle loading error and success states
+Validate inputs before submission
+Show user-friendly error messages
+
+## EmailJS Template Variables Expected
+
+The EmailJS template should use these variables:
+to_name - Restaurant name
+from_name - Customer name
+from_email - Customer email
+phone - Customer phone
+date - Reservation date
+time - Reservation time
+guests - Number of guests
+special_requests - Any special requests
+reply_to - Customer email for replies
+
+## Git Commit Rules
+
+NEVER add signatures or AI references in:
+
+- Commit messages
+- Code comments
+- Pull request descriptions
+- Any files
+
+Write all commits as if the developer wrote them directly.
+No "Built by Claude" or similar references anywhere.
+
+## Design Guidelines
+
+CRITICAL: Read DESIGN_GUIDELINES.md in project root before building any section component
+
+Saisei-inspired design system with these priorities:
+
+1. Grand scale typography (text-7xl for hero, text-6xl for sections)
+2. Generous spacing (py-24 sections, py-32 hero)
+3. Theme colors ONLY (never hardcode hex values)
+4. Phased animation approach (structure Week 2, motion Week 3)
+
+Key spacing values:
+
+- Section vertical: py-16 mobile, py-20 tablet, py-24 desktop
+- Heading to body: mb-6
+- Button groups: gap-4
+- Card grids: gap-6 or gap-8
+
+Typography hierarchy:
+
+- Hero H1: text-5xl mobile → text-7xl desktop, font-serif, text-primary-gold
+- Section H2: text-4xl mobile → text-6xl desktop, font-serif, text-primary-gold
+- Body: text-base → text-lg, font-sans, text-accent-white
+
+Animation rules Week 2:
+
+- NO animations during initial build
+- Focus on layout, spacing, content structure
+- Animations added in Week 3 polish phase
+
+Animation rules Week 3:
+
+- Use existing classes: animate-fade-in, animate-slide-up, animate-delay-X
+- Use useIntersectionObserver for viewport entry
+- Use useScrollPosition for parallax effects
+- Only animate transform and opacity (GPU-accelerated)
+
+Image requirements:
+
+- Use loading="lazy" for below-fold images
+- Use loading="eager" fetchpriority="high" for hero
+- Implement blur placeholder while loading
+- Grid images use group hover:scale-105 effect
+
+Never hardcode colors examples:
+
+- WRONG: text-[#D4AF37], style={{ color: '#d4af37' }}
+- RIGHT: text-primary-gold, style={{ color: 'var(--color-primary-gold)' }}
+
+Component building checklist with design:
+
+- Use .section class for vertical spacing
+- Use .container-custom for horizontal constraints
+- Use .section-title for section headings
+- Typography scale from guidelines
+- Theme colors only
+- Mobile-first responsive
+- Accessibility maintained
+- NO animations in Week 2
+- Structure and spacing focus
+
+Git commit rules:
+
+- NEVER add AI signatures or references
+- Write commits as if developer wrote them directly
+- No "Built by Claude" anywhere
+
+When building sections in Week 2:
+
+- Focus ONLY on structure, layout, content
+- Use correct spacing from guidelines
+- Use typography scale from guidelines
+- Use theme colors from guidelines
+- Skip ALL animations and fancy effects
+- Make it work first, polish later
