@@ -62,15 +62,9 @@ const Header = () => {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <Button
-                variant="primary"
-                size="default"
-                onClick={() => {
-                  document.querySelector('#reservations')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <a href="#reservation" className="btn btn-primary">
                 Reserve Table
-              </Button>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}

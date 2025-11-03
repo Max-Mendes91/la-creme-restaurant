@@ -3,7 +3,7 @@ import LocationMap from './LocationMap';
 
 const ContactSection = () => {
   return (
-    <section className="section bg-accent-gray">
+    <section id="contact" className="section bg-accent-gray">
       <div className="container-custom">
         <h2 className="section-title">Visit Us</h2>
         <div className="divider" />

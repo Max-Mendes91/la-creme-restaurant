@@ -1,8 +1,6 @@
-import Button from '../../common/Button/Button';
-
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image Layer */}
       <div className="absolute inset-0 z-0">
         <picture>
@@ -34,9 +32,9 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button */}
-          <Button variant="primary" size="lg">
+          <a href="#reservation" className="btn btn-primary btn-lg">
             SECURE YOUR RESERVATION
-          </Button>
+          </a>
         </div>
       </div>
     </section>

@@ -84,11 +84,24 @@ const ReservationForm = () => {
         if (selectedDate < today) {
           return 'Please select a future date';
         }
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth() + 3);
+        maxDate.setHours(0, 0, 0, 0);
+        if (selectedDate > maxDate) {
+          return 'Reservations available up to 3 months in advance';
+        }
         return '';
 
       case 'time':
         if (!value) {
           return 'Time is required';
+        }
+        const [hours, minutes] = value.split(':').map(Number);
+        const timeInMinutes = hours * 60 + minutes;
+        const openingTime = 11 * 60; // 11:00 AM
+        const closingTime = 22 * 60; // 10:00 PM
+        if (timeInMinutes < openingTime || timeInMinutes > closingTime) {
+          return 'Please select a time between 11:00 AM and 10:00 PM';
         }
         return '';
 
@@ -223,6 +236,13 @@ const ReservationForm = () => {
   const getMinDate = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
+  };
+
+  // Get maximum date (3 months from today)
+  const getMaxDate = () => {
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 3);
+    return maxDate.toISOString().split('T')[0];
   };
 
   return (
@@ -394,6 +414,7 @@ const ReservationForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               min={getMinDate()}
+              max={getMaxDate()}
               className={`input ${errors.date && touched.date ? 'input-error' : ''}`}
               aria-required="true"
               aria-invalid={errors.date && touched.date ? 'true' : 'false'}
@@ -419,6 +440,8 @@ const ReservationForm = () => {
               value={formData.time}
               onChange={handleChange}
               onBlur={handleBlur}
+              min="11:00"
+              max="22:00"
               className={`input ${errors.time && touched.time ? 'input-error' : ''}`}
               aria-required="true"
               aria-invalid={errors.time && touched.time ? 'true' : 'false'}

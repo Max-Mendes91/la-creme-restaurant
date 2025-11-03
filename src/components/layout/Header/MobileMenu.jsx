@@ -11,8 +11,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'menu', label: 'Menu', href: '#menu' },
     { id: 'gallery', label: 'Gallery', href: '#gallery' },
-    { id: 'reservations', label: 'Reservations', href: '#reservations' },
     { id: 'contact', label: 'Contact', href: '#contact' },
+    { id: 'reservation', label: 'Reservations', href: '#reservation' },
   ];
 
   // Focus management
@@ -67,7 +67,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
   };
 
   const handleReserveClick = () => {
-    const target = document.querySelector('#reservations');
+    const target = document.querySelector('#reservation');
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }

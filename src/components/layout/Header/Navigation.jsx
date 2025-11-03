@@ -8,8 +8,8 @@ const Navigation = ({ className = '' }) => {
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'menu', label: 'Menu', href: '#menu' },
     { id: 'gallery', label: 'Gallery', href: '#gallery' },
-    { id: 'reservations', label: 'Reservations', href: '#reservations' },
     { id: 'contact', label: 'Contact', href: '#contact' },
+    { id: 'reservation', label: 'Reservations', href: '#reservation' },
   ];
 
   const handleClick = (e, id, href) => {
