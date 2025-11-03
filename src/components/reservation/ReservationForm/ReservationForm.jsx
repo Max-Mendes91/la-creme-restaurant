@@ -25,14 +25,17 @@ const ReservationForm = () => {
   const { makeReservation, isLoading, error: apiError, success, reset } = useReservation();
 
   // Use pre-order context
-  const { preOrderItems, clearOrder } = usePreOrder();
+  const { getItemsArray, clearOrder } = usePreOrder();
 
-  // Format pre-order items for EmailJS
-  const formatPreOrderItems = (items) => {
-    if (items.length === 0) return 'No pre-selected items';
+  // Format pre-order items for EmailJS with quantities
+  const formatPreOrderItems = (itemsArray) => {
+    if (itemsArray.length === 0) return 'No pre-selected items';
 
-    return items
-      .map((item) => `${item.name} - $${item.price}`)
+    return itemsArray
+      .map(
+        ({ item, quantity }) =>
+          `${item.name} x${quantity} - $${item.price * quantity}`
+      )
       .join('\n');
   };
 
@@ -175,8 +178,9 @@ const ReservationForm = () => {
     }
 
     try {
-      // Format pre-order items for email
-      const formattedPreOrder = formatPreOrderItems(preOrderItems);
+      // Get items as array and format for email
+      const itemsArray = getItemsArray();
+      const formattedPreOrder = formatPreOrderItems(itemsArray);
 
       // Include pre-order items in the reservation data
       const reservationData = {
@@ -225,7 +229,7 @@ const ReservationForm = () => {
     <div className="w-full max-w-2xl mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
         {/* Pre-Selected Items Preview */}
-        {preOrderItems.length > 0 && (
+        {getItemsArray().length > 0 && (
           <div className="p-6 rounded-sm bg-accent-gray border-2 border-primary-gold">
             <h3 className="text-lg font-serif text-primary-gold mb-3 flex items-center gap-2">
               <svg
@@ -245,20 +249,24 @@ const ReservationForm = () => {
               Pre-Selected Menu Items
             </h3>
             <ul className="space-y-2">
-              {preOrderItems.map((item) => (
+              {getItemsArray().map(({ item, quantity }) => (
                 <li
                   key={item.id}
                   className="flex items-center justify-between text-sm text-accent-white border-b border-accent-gray-light pb-2"
                 >
-                  <span>{item.name}</span>
-                  <span className="text-primary-gold font-semibold">${item.price}</span>
+                  <span>
+                    {item.name} <span className="text-primary-gold">x{quantity}</span>
+                  </span>
+                  <span className="text-primary-gold font-semibold">
+                    ${item.price * quantity}
+                  </span>
                 </li>
               ))}
             </ul>
             <div className="mt-4 pt-3 border-t border-primary-gold flex items-center justify-between">
               <span className="font-semibold text-accent-white">Total</span>
               <span className="text-xl font-bold text-primary-gold">
-                ${preOrderItems.reduce((sum, item) => sum + item.price, 0)}
+                ${getItemsArray().reduce((sum, { item, quantity }) => sum + item.price * quantity, 0)}
               </span>
             </div>
             <p className="text-xs text-accent-white/60 mt-3">

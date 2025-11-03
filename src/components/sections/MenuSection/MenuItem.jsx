@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import { usePreOrder } from '@/hooks/usePreOrder';
-import Button from '@/components/common/Button/Button';
 
 const MenuItem = ({ item }) => {
-  const { addItemToOrder, removeItemFromOrder, isItemSelected } = usePreOrder();
-  const isSelected = isItemSelected(item.id);
+  const { addItemToOrder, removeItemFromOrder, getItemQuantity } = usePreOrder();
+  const quantity = getItemQuantity(item.id);
+  const isSelected = quantity > 0;
 
-  const handleToggle = () => {
-    if (isSelected) {
-      removeItemFromOrder(item.id);
-    } else {
-      addItemToOrder(item);
-    }
+  const handleIncrement = () => {
+    addItemToOrder(item);
+  };
+
+  const handleDecrement = () => {
+    removeItemFromOrder(item.id);
   };
 
   return (
@@ -53,28 +53,67 @@ const MenuItem = ({ item }) => {
           {item.description}
         </p>
 
-        {/* Button Section - stays at bottom */}
+        {/* Quantity Controls Section - stays at bottom */}
         <div className="space-y-2 mt-auto">
-          {/* Pre-Select Button */}
-          <Button
-            variant={isSelected ? 'primary' : 'secondary'}
-            size="sm"
-            onClick={handleToggle}
-            className="w-full"
-            aria-pressed={isSelected}
-            aria-label={
-              isSelected
-                ? `Remove ${item.name} from pre-order`
-                : `Pre-select ${item.name} for reservation`
-            }
+          {/* Quantity Controls */}
+          <div
+            className={`
+              flex items-center justify-center gap-4 py-3 rounded-sm border-2 transition-all
+              ${
+                isSelected
+                  ? 'border-primary-gold bg-primary-gold/10'
+                  : 'border-accent-gray-light'
+              }
+            `}
           >
-            {isSelected ? 'REMOVE' : 'PRE-SELECT'}
-          </Button>
+            {/* Decrement Button */}
+            <button
+              onClick={handleDecrement}
+              disabled={quantity === 0}
+              className={`
+                w-8 h-8 rounded-sm flex items-center justify-center font-bold text-lg
+                transition-all duration-200
+                ${
+                  quantity === 0
+                    ? 'bg-accent-gray-light text-accent-white/30 cursor-not-allowed'
+                    : 'bg-accent-gray-light text-primary-gold hover:bg-primary-gold hover:text-primary-black'
+                }
+              `}
+              aria-label={`Decrease quantity of ${item.name}`}
+            >
+              −
+            </button>
+
+            {/* Quantity Display */}
+            <span
+              className={`
+                min-w-[2rem] text-center font-semibold text-lg
+                ${isSelected ? 'text-primary-gold' : 'text-accent-white/50'}
+              `}
+              aria-label={`Quantity: ${quantity}`}
+            >
+              {quantity}
+            </span>
+
+            {/* Increment Button */}
+            <button
+              onClick={handleIncrement}
+              className="
+                w-8 h-8 rounded-sm flex items-center justify-center font-bold text-lg
+                bg-accent-gray-light text-primary-gold
+                hover:bg-primary-gold hover:text-primary-black
+                transition-all duration-200
+              "
+              aria-label={`Increase quantity of ${item.name}`}
+            >
+              +
+            </button>
+          </div>
 
           {/* Selected Indicator */}
           {isSelected && (
             <p className="text-xs text-primary-gold text-center font-medium">
-              Added to your reservation
+              {quantity} {quantity === 1 ? 'item' : 'items'} in your reservation
             </p>
           )}
         </div>

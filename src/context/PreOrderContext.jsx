@@ -5,42 +5,79 @@ import PropTypes from 'prop-types';
 const PreOrderContext = createContext(undefined);
 
 /**
- * PreOrderProvider - Manages global state for pre-selected menu items
+ * PreOrderProvider - Manages global state for pre-selected menu items with quantities
  *
  * This context allows users to select menu items across the Menu Section
  * and have them automatically included in the Reservation Form.
  *
- * State structure: Array of menu item objects
- * Example: [{ id: 'app-1', name: 'Foie Gras Terrine', price: 24, description: '...' }]
+ * State structure: Object with itemId as key
+ * Example: {
+ *   'app-1': { item: { id, name, price, description }, quantity: 2 },
+ *   'main-2': { item: { id, name, price, description }, quantity: 1 }
+ * }
  */
 export const PreOrderProvider = ({ children }) => {
-  const [preOrderItems, setPreOrderItems] = useState([]);
+  const [preOrderItems, setPreOrderItems] = useState({});
 
   /**
-   * Add item to pre-order list
-   * Only adds if item doesn't already exist (prevents duplicates)
+   * Increase item quantity (add item or increment)
+   * If item doesn't exist, adds with quantity 1
+   * If item exists, increments quantity
    */
   const addItemToOrder = (item) => {
     setPreOrderItems((prevItems) => {
-      // Check if item already exists
-      const exists = prevItems.some((existingItem) => existingItem.id === item.id);
+      const existingEntry = prevItems[item.id];
 
-      if (exists) {
-        return prevItems; // Don't add duplicate
+      if (existingEntry) {
+        // Increment quantity
+        return {
+          ...prevItems,
+          [item.id]: {
+            ...existingEntry,
+            quantity: existingEntry.quantity + 1,
+          },
+        };
+      } else {
+        // Add new item with quantity 1
+        return {
+          ...prevItems,
+          [item.id]: {
+            item,
+            quantity: 1,
+          },
+        };
       }
-
-      // Add new item immutably
-      return [...prevItems, item];
     });
   };
 
   /**
-   * Remove item from pre-order list by ID
+   * Decrease item quantity (decrement or remove)
+   * If quantity > 1, decrements
+   * If quantity = 1, removes item entirely
    */
   const removeItemFromOrder = (itemId) => {
-    setPreOrderItems((prevItems) =>
-      prevItems.filter((item) => item.id !== itemId)
-    );
+    setPreOrderItems((prevItems) => {
+      const existingEntry = prevItems[itemId];
+
+      if (!existingEntry) {
+        return prevItems; // Item doesn't exist, no change
+      }
+
+      if (existingEntry.quantity > 1) {
+        // Decrement quantity
+        return {
+          ...prevItems,
+          [itemId]: {
+            ...existingEntry,
+            quantity: existingEntry.quantity - 1,
+          },
+        };
+      } else {
+        // Remove item entirely
+        const { [itemId]: removed, ...rest } = prevItems;
+        return rest;
+      }
+    });
   };
 
   /**
@@ -48,7 +85,15 @@ export const PreOrderProvider = ({ children }) => {
    * Used after successful reservation submission
    */
   const clearOrder = () => {
-    setPreOrderItems([]);
+    setPreOrderItems({});
+  };
+
+  /**
+   * Get quantity for a specific item
+   * Returns 0 if item not in order
+   */
+  const getItemQuantity = (itemId) => {
+    return preOrderItems[itemId]?.quantity || 0;
   };
 
   /**
@@ -56,21 +101,35 @@ export const PreOrderProvider = ({ children }) => {
    * Returns boolean
    */
   const isItemSelected = (itemId) => {
-    return preOrderItems.some((item) => item.id === itemId);
+    return itemId in preOrderItems;
   };
 
   /**
-   * Get total count of selected items
+   * Get total count of selected items (sum of all quantities)
    */
   const getItemCount = () => {
-    return preOrderItems.length;
+    return Object.values(preOrderItems).reduce(
+      (total, entry) => total + entry.quantity,
+      0
+    );
   };
 
   /**
-   * Get total price of all selected items
+   * Get total price of all selected items (price * quantity)
    */
   const getTotalPrice = () => {
-    return preOrderItems.reduce((total, item) => total + item.price, 0);
+    return Object.values(preOrderItems).reduce(
+      (total, entry) => total + entry.item.price * entry.quantity,
+      0
+    );
+  };
+
+  /**
+   * Get items as array for display purposes
+   * Returns: [{ item, quantity }]
+   */
+  const getItemsArray = () => {
+    return Object.values(preOrderItems);
   };
 
   const value = {
@@ -79,8 +138,10 @@ export const PreOrderProvider = ({ children }) => {
     removeItemFromOrder,
     clearOrder,
     isItemSelected,
+    getItemQuantity,
     getItemCount,
     getTotalPrice,
+    getItemsArray,
   };
 
   return (
