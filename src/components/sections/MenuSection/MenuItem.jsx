@@ -17,7 +17,7 @@ const MenuItem = ({ item }) => {
   return (
     <article
       className={`
-        card-hover transition-all duration-300
+        card-hover transition-all duration-300 flex flex-col h-full
         ${isSelected ? 'border-2 border-primary-gold' : 'border-2 border-transparent'}
       `}
       aria-label={`${item.name} - $${item.price}`}
@@ -36,8 +36,8 @@ const MenuItem = ({ item }) => {
         />
       </div>
 
-      {/* Menu Item Content */}
-      <div className="space-y-3">
+      {/* Menu Item Content - grows to fill space */}
+      <div className="flex flex-col grow space-y-3">
         {/* Name and Price */}
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-xl font-serif text-primary-gold font-semibold">
@@ -48,33 +48,36 @@ const MenuItem = ({ item }) => {
           </span>
         </div>
 
-        {/* Description */}
-        <p className="text-sm text-accent-white/80 leading-relaxed">
+        {/* Description - grows to fill available space */}
+        <p className="text-sm text-accent-white/80 leading-relaxed grow">
           {item.description}
         </p>
 
-        {/* Pre-Select Button */}
-        <Button
-          variant={isSelected ? 'primary' : 'secondary'}
-          size="sm"
-          onClick={handleToggle}
-          className="w-full"
-          aria-pressed={isSelected}
-          aria-label={
-            isSelected
-              ? `Remove ${item.name} from pre-order`
-              : `Pre-select ${item.name} for reservation`
-          }
-        >
-          {isSelected ? 'REMOVE' : 'PRE-SELECT'}
-        </Button>
+        {/* Button Section - stays at bottom */}
+        <div className="space-y-2 mt-auto">
+          {/* Pre-Select Button */}
+          <Button
+            variant={isSelected ? 'primary' : 'secondary'}
+            size="sm"
+            onClick={handleToggle}
+            className="w-full"
+            aria-pressed={isSelected}
+            aria-label={
+              isSelected
+                ? `Remove ${item.name} from pre-order`
+                : `Pre-select ${item.name} for reservation`
+            }
+          >
+            {isSelected ? 'REMOVE' : 'PRE-SELECT'}
+          </Button>
 
-        {/* Selected Indicator */}
-        {isSelected && (
-          <p className="text-xs text-primary-gold text-center font-medium">
-            Added to your reservation
-          </p>
-        )}
+          {/* Selected Indicator */}
+          {isSelected && (
+            <p className="text-xs text-primary-gold text-center font-medium">
+              Added to your reservation
+            </p>
+          )}
+        </div>
       </div>
     </article>
   );
