@@ -1,20 +1,12 @@
-import Layout from './components/layout/Layout';
+import Layout from "./components/layout/Layout";
+import HeroSection from "./components/sections/HeroSection";
 
 function App() {
   return (
     <Layout>
       <div className="min-h-screen bg-primary-black">
-        {/* Home Section */}
-        <section id="home" className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-6xl font-serif text-primary-gold mb-4">
-              La Crème
-            </h1>
-            <p className="text-xl text-accent-white mb-2">
-              Elegant French Dining Experience
-            </p>
-          </div>
-        </section>
+        {/* Hero Section */}
+        <HeroSection />
 
         {/* Menu Section */}
         <section id="menu" className="section bg-accent-gray">
