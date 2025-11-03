@@ -51,7 +51,7 @@ const Input = ({
       {label && (
         <label htmlFor={inputId} className="label">
           {label}
-          {required && <span className="text-red-400 ml-1" aria-label="required">*</span>}
+          {required && <span className="text-error ml-1" aria-label="required">*</span>}
         </label>
       )}
 

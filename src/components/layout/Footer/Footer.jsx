@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -138,5 +140,7 @@ const Footer = () => {
     </footer>
   );
 };
+
+Footer.propTypes = {};
 
 export default Footer;

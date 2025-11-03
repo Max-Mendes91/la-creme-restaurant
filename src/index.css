@@ -17,6 +17,9 @@
   --color-accent-gray: #1a1a1a;
   --color-accent-gray-light: #2a2a2a;
 
+  --color-error: #f87171;
+  --color-muted: #9ca3af;
+
   /* Custom Fonts */
   --font-family-serif: 'Playfair Display', serif;
   --font-family-sans: 'Inter', sans-serif;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useReservation } from '@hooks/useReservation';
 
 const ReservationForm = () => {
@@ -164,7 +165,6 @@ const ReservationForm = () => {
       await makeReservation(formData);
     } catch (err) {
       // Error handled by hook
-      console.error('Reservation failed:', err);
     }
   };
 
@@ -228,7 +228,7 @@ const ReservationForm = () => {
         {/* Name Field */}
         <div>
           <label htmlFor="name" className="label">
-            Full Name <span className="text-red-400">*</span>
+            Full Name <span className="text-error">*</span>
           </label>
           <input
             type="text"
@@ -254,7 +254,7 @@ const ReservationForm = () => {
         {/* Email Field */}
         <div>
           <label htmlFor="email" className="label">
-            Email Address <span className="text-red-400">*</span>
+            Email Address <span className="text-error">*</span>
           </label>
           <input
             type="email"
@@ -280,7 +280,7 @@ const ReservationForm = () => {
         {/* Phone Field */}
         <div>
           <label htmlFor="phone" className="label">
-            Phone Number <span className="text-red-400">*</span>
+            Phone Number <span className="text-error">*</span>
           </label>
           <input
             type="tel"
@@ -308,7 +308,7 @@ const ReservationForm = () => {
           {/* Date Field */}
           <div>
             <label htmlFor="date" className="label">
-              Date <span className="text-red-400">*</span>
+              Date <span className="text-error">*</span>
             </label>
             <input
               type="date"
@@ -334,7 +334,7 @@ const ReservationForm = () => {
           {/* Time Field */}
           <div>
             <label htmlFor="time" className="label">
-              Time <span className="text-red-400">*</span>
+              Time <span className="text-error">*</span>
             </label>
             <input
               type="time"
@@ -360,7 +360,7 @@ const ReservationForm = () => {
         {/* Guests Field */}
         <div>
           <label htmlFor="guests" className="label">
-            Number of Guests <span className="text-red-400">*</span>
+            Number of Guests <span className="text-error">*</span>
           </label>
           <input
             type="number"
@@ -388,7 +388,7 @@ const ReservationForm = () => {
         {/* Special Requests Field */}
         <div>
           <label htmlFor="specialRequests" className="label">
-            Special Requests <span className="text-gray-400">(Optional)</span>
+            Special Requests <span className="text-muted">(Optional)</span>
           </label>
           <textarea
             id="specialRequests"
@@ -401,7 +401,7 @@ const ReservationForm = () => {
             aria-describedby="special-requests-help"
             disabled={isLoading}
           />
-          <p id="special-requests-help" className="text-sm text-gray-400 mt-1">
+          <p id="special-requests-help" className="text-sm text-muted mt-1">
             Let us know if you have any special requirements or celebrations
           </p>
         </div>
@@ -446,5 +446,7 @@ const ReservationForm = () => {
     </div>
   );
 };
+
+ReservationForm.propTypes = {};
 
 export default ReservationForm;
