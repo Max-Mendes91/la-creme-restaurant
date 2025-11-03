@@ -1,22 +1,19 @@
 import Layout from "./components/layout/Layout";
 import HeroSection from "./components/sections/HeroSection";
+import MenuSection from "./components/sections/MenuSection";
+import ReservationForm from "./components/reservation/ReservationForm/ReservationForm";
+import { PreOrderProvider } from "./context/PreOrderContext";
 
 function App() {
   return (
-    <Layout>
-      <div className="min-h-screen bg-primary-black">
+    <PreOrderProvider>
+      <Layout>
+        <div className="min-h-screen bg-primary-black">
         {/* Hero Section */}
         <HeroSection />
 
         {/* Menu Section */}
-        <section id="menu" className="section bg-accent-gray">
-          <div className="container-custom">
-            <h2 className="section-title">Our Menu</h2>
-            <p className="section-subtitle">
-              Discover our exquisite selection of French culinary delights
-            </p>
-          </div>
-        </section>
+        <MenuSection />
 
         {/* Gallery Section */}
         <section id="gallery" className="section bg-primary-black">
@@ -30,11 +27,13 @@ function App() {
 
         {/* Reservations Section */}
         <section id="reservations" className="section bg-accent-gray">
-          <div className="container-custom">
-            <h2 className="section-title">Reservations</h2>
+          <div className="container-narrow">
+            <h2 className="section-title">Make a Reservation</h2>
+            <div className="divider" />
             <p className="section-subtitle">
               Reserve your table for an unforgettable dining experience
             </p>
+            <ReservationForm />
           </div>
         </section>
 
@@ -49,6 +48,7 @@ function App() {
         </section>
       </div>
     </Layout>
+    </PreOrderProvider>
   );
 }
 

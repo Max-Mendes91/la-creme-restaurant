@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useReservation } from '@hooks/useReservation';
+import { usePreOrder } from '@/context/PreOrderContext';
 
 const ReservationForm = () => {
   // Form state
@@ -22,6 +23,18 @@ const ReservationForm = () => {
 
   // Use reservation hook
   const { makeReservation, isLoading, error: apiError, success, reset } = useReservation();
+
+  // Use pre-order context
+  const { preOrderItems, clearOrder } = usePreOrder();
+
+  // Format pre-order items for EmailJS
+  const formatPreOrderItems = (items) => {
+    if (items.length === 0) return 'No pre-selected items';
+
+    return items
+      .map((item) => `${item.name} - $${item.price}`)
+      .join('\n');
+  };
 
   // Validation rules
   const validateField = (name, value) => {
@@ -162,7 +175,19 @@ const ReservationForm = () => {
     }
 
     try {
-      await makeReservation(formData);
+      // Format pre-order items for email
+      const formattedPreOrder = formatPreOrderItems(preOrderItems);
+
+      // Include pre-order items in the reservation data
+      const reservationData = {
+        ...formData,
+        preOrderItems: formattedPreOrder,
+      };
+
+      await makeReservation(reservationData);
+
+      // Clear pre-order after successful submission
+      clearOrder();
     } catch (err) {
       // Error handled by hook
     }
@@ -199,6 +224,49 @@ const ReservationForm = () => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        {/* Pre-Selected Items Preview */}
+        {preOrderItems.length > 0 && (
+          <div className="p-6 rounded-sm bg-accent-gray border-2 border-primary-gold">
+            <h3 className="text-lg font-serif text-primary-gold mb-3 flex items-center gap-2">
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+              Pre-Selected Menu Items
+            </h3>
+            <ul className="space-y-2">
+              {preOrderItems.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex items-center justify-between text-sm text-accent-white border-b border-accent-gray-light pb-2"
+                >
+                  <span>{item.name}</span>
+                  <span className="text-primary-gold font-semibold">${item.price}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 pt-3 border-t border-primary-gold flex items-center justify-between">
+              <span className="font-semibold text-accent-white">Total</span>
+              <span className="text-xl font-bold text-primary-gold">
+                ${preOrderItems.reduce((sum, item) => sum + item.price, 0)}
+              </span>
+            </div>
+            <p className="text-xs text-accent-white/60 mt-3">
+              These items will be included in your reservation confirmation
+            </p>
+          </div>
+        )}
+
         {/* Success Message */}
         {success && (
           <div

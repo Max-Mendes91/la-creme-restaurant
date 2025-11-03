@@ -35,6 +35,7 @@ export const submitReservation = async (reservationData) => {
       reservation_time: reservationData.time,
       guests: reservationData.guests,
       special_requests: reservationData.specialRequests || 'None',
+      pre_order_items: reservationData.preOrderItems || 'No pre-selected items',
     };
 
     console.log('Sending with template params:', templateParams);
