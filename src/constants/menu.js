@@ -92,3 +92,40 @@ export const MENU_ITEMS = [
     image: '/images/menu/desserts/tarte-tatin.jpg',
   },
 ];
+
+/**
+ * Discovery Items - Exclusive in-house only selections
+ * These items are not available for pre-order and have no fixed pricing
+ */
+export const DISCOVERY_ITEMS = [
+  {
+    id: 'disc-1',
+    name: 'Truffle Risotto with Gold Leaf',
+    description: 'Arborio rice finished tableside with white truffle shavings and 24-karat gold leaf',
+  },
+  {
+    id: 'disc-2',
+    name: 'Wagyu Beef Tasting Experience',
+    description: 'A curated selection of A5 Japanese Wagyu from three regions, prepared to your preference',
+  },
+  {
+    id: 'disc-3',
+    name: 'Caviar Service',
+    description: 'Beluga or Ossetra caviar presented with traditional accompaniments and champagne pairing',
+  },
+  {
+    id: 'disc-4',
+    name: 'Chef\'s Omakase Tasting Menu',
+    description: 'Seven-course journey through seasonal ingredients, curated daily by our executive chef',
+  },
+  {
+    id: 'disc-5',
+    name: 'Vintage Wine Pairing Experience',
+    description: 'Sommelier-selected rare vintages paired with each course, featuring bottles from our private cellar',
+  },
+  {
+    id: 'disc-6',
+    name: 'Flambé Dessert Presentation',
+    description: 'Dramatic tableside preparation of Crêpes Suzette or Bananas Foster for two',
+  },
+];

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { MENU_ITEMS, MENU_CATEGORIES } from '@/constants/menu';
+import { MENU_ITEMS, MENU_CATEGORIES, DISCOVERY_ITEMS } from '@/constants/menu';
 import MenuCategories from './MenuCategories';
 import MenuGrid from './MenuGrid';
+import DiscoverySection from './DiscoverySection';
 
 const MenuSection = () => {
   const [activeCategory, setActiveCategory] = useState('Appetizers');
@@ -34,6 +35,9 @@ const MenuSection = () => {
 
         {/* Menu Items Grid */}
         <MenuGrid items={filteredItems} />
+
+        {/* Discovery Section */}
+        <DiscoverySection items={DISCOVERY_ITEMS} />
       </div>
     </section>
   );
