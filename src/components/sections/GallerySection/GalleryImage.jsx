@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 /**
  * GalleryImage Component
  * Individual gallery image with hover effects and category overlay
  * Features lazy loading for performance
  */
-const GalleryImage = ({ image, onClick }) => {
+const GalleryImage = ({ image, onClick, index }) => {
+  const [ref, isVisible] = useIntersectionObserver();
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -15,7 +17,11 @@ const GalleryImage = ({ image, onClick }) => {
 
   return (
     <div
-      className="group relative overflow-hidden cursor-pointer"
+      ref={ref}
+      className={`group relative overflow-hidden cursor-pointer transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+      style={{ transitionDelay: `${index * 50}ms` }}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       role="button"
@@ -47,6 +53,7 @@ GalleryImage.propTypes = {
     category: PropTypes.string.isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default GalleryImage;

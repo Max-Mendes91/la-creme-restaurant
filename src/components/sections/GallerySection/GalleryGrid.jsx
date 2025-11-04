@@ -9,10 +9,11 @@ import GalleryImage from './GalleryImage';
 const GalleryGrid = ({ images, onImageClick }) => {
   return (
     <div className="grid-auto-fit gap-6">
-      {images.map((image) => (
+      {images.map((image, index) => (
         <GalleryImage
           key={image.id}
           image={image}
+          index={index}
           onClick={() => onImageClick(image)}
         />
       ))}

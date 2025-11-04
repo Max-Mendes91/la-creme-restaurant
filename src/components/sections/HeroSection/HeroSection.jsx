@@ -22,17 +22,17 @@ const HeroSection = () => {
       <div className="relative z-20 container-custom py-32 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Main Heading */}
-          <h1 className="font-serif text-primary-gold text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance">
+          <h1 className="font-serif text-primary-gold text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance animate-fade-in">
             LA CRÈME
           </h1>
 
           {/* Tagline */}
-          <p className="text-xl md:text-2xl text-accent-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-accent-white/80 mb-8 max-w-2xl mx-auto animate-fade-in animate-delay-200">
             An Architecture of Taste. Reservations Secured.
           </p>
 
           {/* CTA Button */}
-          <a href="#reservation" className="btn btn-primary btn-lg">
+          <a href="#reservation" className="btn btn-primary btn-lg animate-fade-in animate-delay-400">
             SECURE YOUR RESERVATION
           </a>
         </div>
