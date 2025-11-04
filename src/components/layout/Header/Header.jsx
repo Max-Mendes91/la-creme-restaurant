@@ -1,22 +1,14 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import useScrollPosition from '@/hooks/useScrollPosition';
 import Navigation from './Navigation';
 import MobileMenu from './MobileMenu';
 import Button from '../../common/Button/Button';
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const scrollY = useScrollPosition();
+  const isScrolled = scrollY > 100;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -43,7 +35,7 @@ const Header = () => {
       <header
         className={`
           fixed top-0 left-0 right-0 z-50 transition-all duration-300
-          ${isScrolled ? 'bg-primary-black shadow-lg' : 'bg-transparent'}
+          ${isScrolled ? 'bg-primary-black shadow-gold-glow' : 'bg-transparent'}
         `}
       >
         <div className="container-custom">
