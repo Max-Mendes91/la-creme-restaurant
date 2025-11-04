@@ -1,18 +1,24 @@
+import useScrollPosition from '@/hooks/useScrollPosition';
+
 const HeroSection = () => {
+  const scrollY = useScrollPosition();
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image Layer */}
       <div className="absolute inset-0 z-0">
-        <picture>
-          <source srcSet="/images/hero/hero-bg.webp" type="image/webp" />
-          <img
-            src="/images/hero/hero-bg.jpg"
-            alt="La Crème Restaurant"
-            loading="eager"
-            fetchPriority="high"
-            className="w-full h-full object-cover"
-          />
-        </picture>
+        <div style={{ transform: `translateY(${scrollY * 0.5}px)`, willChange: 'transform' }}>
+          <picture>
+            <source srcSet="/images/hero/hero-bg.webp" type="image/webp" />
+            <img
+              src="/images/hero/hero-bg.jpg"
+              alt="La Crème Restaurant"
+              loading="eager"
+              fetchPriority="high"
+              className="w-full h-full object-cover"
+            />
+          </picture>
+        </div>
       </div>
 
       {/* Overlay Gradient */}
