@@ -1,3 +1,4 @@
+/* eslint-env node */
 import sharp from 'sharp';
 import { readdir, mkdir } from 'fs/promises';
 import { join, parse } from 'path';
