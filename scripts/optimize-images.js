@@ -37,7 +37,7 @@ async function ensureDirectory(path) {
 }
 
 async function processImage(inputPath, outputDir, filename) {
-  const { name, ext } = parse(filename);
+  const { name } = parse(filename);
 
   // Skip already optimized files
   if (name.includes('-400w') || name.includes('-800w') || name.includes('-1200w')) {
@@ -88,37 +88,41 @@ async function processImage(inputPath, outputDir, filename) {
   }
 }
 
-async function processDirectory(dir) {
-  const inputDir = join(process.cwd(), 'public', 'images-original', dir);
-  const outputDir = join(process.cwd(), 'public', 'images', dir);
+async function processDirectory(dir, subdir = '') {
+  const inputDir = join(process.cwd(), 'public', 'images-original', dir, subdir);
+  const outputDir = join(process.cwd(), 'public', 'images', dir, subdir);
 
-  // Check if input directory has files
+  // Check if input directory exists
   if (!existsSync(inputDir)) {
-    console.log(`\n⚠ Skipping ${dir}: No input directory found`);
+    console.log(`\n⚠ Skipping ${dir}${subdir ? '/' + subdir : ''}: No input directory found`);
     return;
   }
 
-  const files = await readdir(inputDir);
+  const files = await readdir(inputDir, { withFileTypes: true });
   const imageFiles = files.filter(f =>
-    /\.(jpg|jpeg|png|webp)$/i.test(f)
+    f.isFile() && /\.(jpg|jpeg|png)$/i.test(f.name)
   );
+  const subdirs = files.filter(f => f.isDirectory());
 
-  if (imageFiles.length === 0) {
-    console.log(`\n⚠ Skipping ${dir}: No images found`);
-    return;
+  // Process images in current directory
+  if (imageFiles.length > 0) {
+    console.log(`\n${'='.repeat(60)}`);
+    console.log(`Processing ${dir.toUpperCase()}${subdir ? '/' + subdir : ''} (${imageFiles.length} images)`);
+    console.log('='.repeat(60));
+
+    // Ensure output directory exists
+    await ensureDirectory(outputDir);
+
+    // Process each image
+    for (const file of imageFiles) {
+      const inputPath = join(inputDir, file.name);
+      await processImage(inputPath, outputDir, file.name);
+    }
   }
 
-  console.log(`\n${'='.repeat(60)}`);
-  console.log(`Processing ${dir.toUpperCase()} directory (${imageFiles.length} images)`);
-  console.log('='.repeat(60));
-
-  // Ensure output directory exists
-  await ensureDirectory(outputDir);
-
-  // Process each image
-  for (const file of imageFiles) {
-    const inputPath = join(inputDir, file);
-    await processImage(inputPath, outputDir, file);
+  // Recursively process subdirectories
+  for (const subDirectory of subdirs) {
+    await processDirectory(dir, join(subdir, subDirectory.name));
   }
 }
 

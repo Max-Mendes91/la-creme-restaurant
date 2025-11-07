@@ -24,16 +24,28 @@ const MenuItem = ({ item }) => {
     >
       {/* Menu Item Image */}
       <div className="aspect-square overflow-hidden rounded-sm mb-4 bg-accent-gray-light">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          onError={(e) => {
-            // Fallback: Use a solid color background if image fails to load
-            e.target.style.display = 'none';
-          }}
-        />
+        <picture>
+          <source
+            srcSet={`${item.image.replace('.webp', '-400w.webp')} 400w, ${item.image.replace('.webp', '-800w.webp')} 800w`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            type="image/webp"
+          />
+          <source
+            srcSet={`${item.image.replace('.webp', '-400w.jpg')} 400w, ${item.image.replace('.webp', '-800w.jpg')} 800w`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            type="image/jpeg"
+          />
+          <img
+            src={item.image.replace('.webp', '-400w.jpg')}
+            alt={item.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            onError={(e) => {
+              // Fallback: Use a solid color background if image fails to load
+              e.target.style.display = 'none';
+            }}
+          />
+        </picture>
       </div>
 
       {/* Menu Item Content - grows to fill space */}
