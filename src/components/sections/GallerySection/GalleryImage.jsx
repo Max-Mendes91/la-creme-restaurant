@@ -18,7 +18,7 @@ const GalleryImage = ({ image, onClick, index }) => {
   return (
     <div
       ref={ref}
-      className={`group relative overflow-hidden cursor-pointer transition-all duration-500 ${
+      className={`group relative overflow-hidden cursor-pointer transition-all duration-500 rounded-lg ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: `${index * 50}ms` }}
@@ -32,7 +32,7 @@ const GalleryImage = ({ image, onClick, index }) => {
         src={image.src}
         alt={image.alt}
         loading="lazy"
-        className="aspect-square object-cover w-full transition-transform duration-500 group-hover:scale-105"
+        className="aspect-square object-cover w-full transition-transform duration-500 group-hover:scale-105 rounded-lg"
       />
 
       {/* Hover Overlay with Category */}

@@ -38,7 +38,7 @@ const MenuItem = ({ item }) => {
           <img
             src={item.image.replace('.webp', '-400w.jpg')}
             alt={item.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-sm"
             loading="lazy"
             onError={(e) => {
               // Fallback: Use a solid color background if image fails to load

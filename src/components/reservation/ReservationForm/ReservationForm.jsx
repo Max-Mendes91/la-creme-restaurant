@@ -302,9 +302,9 @@ const ReservationForm = () => {
             role="alert"
             aria-live="polite"
           >
-            <p className="font-semibold">Reservation Confirmed!</p>
+            <p className="font-semibold">Reservation Request Sent!</p>
             <p className="text-sm mt-1">
-              We've sent a confirmation email to {formData.email}. We look forward to serving you!
+              Your reservation request has been sent. The restaurant will confirm your booking shortly.
             </p>
           </div>
         )}
