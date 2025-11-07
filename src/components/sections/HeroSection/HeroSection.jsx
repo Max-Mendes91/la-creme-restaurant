@@ -9,9 +9,18 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <div style={{ transform: `translateY(${scrollY * 0.5}px)`, willChange: 'transform' }}>
           <picture>
-            <source srcSet="/images/hero/hero-bg.webp" type="image/webp" />
+            <source
+              srcSet="/images/hero/hero-bg-400w.webp 400w, /images/hero/hero-bg-800w.webp 800w, /images/hero/hero-bg-1200w.webp 1200w"
+              sizes="100vw"
+              type="image/webp"
+            />
+            <source
+              srcSet="/images/hero/hero-bg-400w.jpg 400w, /images/hero/hero-bg-800w.jpg 800w, /images/hero/hero-bg-1200w.jpg 1200w"
+              sizes="100vw"
+              type="image/jpeg"
+            />
             <img
-              src="/images/hero/hero-bg.jpg"
+              src="/images/hero/hero-bg-800w.jpg"
               alt="La Crème Restaurant"
               loading="eager"
               fetchPriority="high"
