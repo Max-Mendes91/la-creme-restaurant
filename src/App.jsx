@@ -24,7 +24,7 @@ function App() {
         <ContactSection />
 
         {/* Reservations Section */}
-        <section id="reservation" className="section">
+        <section id="reservation" className="section section-reduced-top">
           <div className="container-narrow">
             <h2 className="section-title">Make a Reservation</h2>
             <div className="divider" />

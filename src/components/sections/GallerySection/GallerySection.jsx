@@ -23,7 +23,7 @@ const GallerySection = () => {
   };
 
   return (
-    <section id="gallery" className="section bg-accent-gray">
+    <section id="gallery" className="section section-reduced-top bg-accent-gray">
       <div className="container-custom">
         <h2 className="section-title">Our Gallery</h2>
         <div className="divider" />

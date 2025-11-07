@@ -273,6 +273,23 @@
     }
   }
 
+  /* Reduced top padding for sections */
+  .section-reduced-top {
+    padding-top: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-reduced-top {
+      padding-top: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-reduced-top {
+      padding-top: 4rem;
+    }
+  }
+
   .section-title {
     font-size: 2.5rem;
     font-family: var(--font-family-serif);

@@ -16,7 +16,7 @@ const MenuSection = () => {
   );
 
   return (
-    <section id="menu" className="section bg-accent-gray">
+    <section id="menu" className="section section-reduced-top bg-accent-gray">
       <div className="container-custom">
         {/* Section Title */}
         <div
