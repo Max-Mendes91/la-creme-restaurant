@@ -67,7 +67,7 @@ const GalleryModal = ({ image, onClose, images }) => {
         <img
           src={currentImage.src}
           alt={currentImage.alt}
-          className="w-full h-auto max-h-[80vh] object-contain"
+          className="w-full h-auto max-h-[80vh] object-contain rounded-sm"
         />
 
         {/* Image Info */}
