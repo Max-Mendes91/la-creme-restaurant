@@ -99,7 +99,7 @@ const MenuItem = ({ item }) => {
             {/* Quantity Display */}
             <span
               className={`
-                min-w-[2rem] text-center font-semibold text-lg
+                min-w-8 text-center font-semibold text-lg
                 ${isSelected ? 'text-primary-gold' : 'text-accent-white/50'}
               `}
               aria-label={`Quantity: ${quantity}`}
