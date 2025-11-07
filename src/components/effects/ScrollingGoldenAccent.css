@@ -1,0 +1,187 @@
+/**
+ * ScrollingGoldenAccent Styles
+ *
+ * Dual-layer elegant golden accent elements with parallax scroll effect
+ * TOP LAYER: Moves down with scroll
+ * BOTTOM LAYER: Moves up with scroll (reverse direction)
+ * Designed for luxury French restaurant aesthetic
+ */
+
+.scrolling-golden-accent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+/* Layer containers */
+.accent-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Base styles for all accent elements */
+.accent-element {
+  position: absolute;
+  will-change: transform;
+  /* GPU acceleration for smooth performance */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Diagonal golden lines - sophisticated architectural details */
+.diagonal-line {
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-primary-gold) 30%,
+    var(--color-primary-gold) 70%,
+    transparent 100%
+  );
+  opacity: 0.08;
+  filter: blur(1px);
+}
+
+/* TOP LAYER diagonal lines */
+.diagonal-line-1 {
+  top: 20%;
+  left: -50%;
+  transform-origin: center;
+}
+
+.diagonal-line-2 {
+  top: 40%;
+  left: -50%;
+  transform-origin: center;
+}
+
+/* MIDDLE LAYER diagonal line - stays visible in mid-sections */
+.diagonal-line-middle {
+  top: 50%;
+  left: -50%;
+  transform-origin: center;
+  transform: translateY(-50%);
+}
+
+/* BOTTOM LAYER diagonal lines (mirrored positioning) */
+.diagonal-line-3 {
+  bottom: 25%;
+  left: -50%;
+  transform-origin: center;
+}
+
+.diagonal-line-4 {
+  bottom: 45%;
+  left: -50%;
+  transform-origin: center;
+}
+
+/* Radial gradient accents - soft golden glows */
+.radial-gradient {
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(
+    circle at center,
+    var(--color-primary-gold) 0%,
+    transparent 70%
+  );
+  opacity: 0.1;
+  filter: blur(70px);
+}
+
+.radial-gradient-1 {
+  top: 15%;
+  right: -200px;
+}
+
+.radial-gradient-2 {
+  bottom: 15%;
+  left: -200px;
+}
+
+/* MIDDLE LAYER radial gradients - positioned for Gallery/Menu sections */
+.radial-gradient-middle-left {
+  top: 50%;
+  left: -300px;
+  transform: translateY(-50%);
+}
+
+.radial-gradient-middle-right {
+  top: 50%;
+  right: -300px;
+  transform: translateY(-50%);
+}
+
+/* BOTTOM LAYER extra radial - ensures Contact/Reservation sections have glow */
+.radial-gradient-bottom-extra {
+  bottom: 25%;
+  right: -250px;
+}
+
+/* Geometric patterns - subtle decorative elements */
+.geometric-pattern {
+  width: 400px;
+  height: 400px;
+  opacity: 0.05;
+  filter: blur(2px);
+  background-image: linear-gradient(
+      45deg,
+      var(--color-primary-gold) 1px,
+      transparent 1px
+    ),
+    linear-gradient(-45deg, var(--color-primary-gold) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+}
+
+/* TOP LAYER geometric pattern */
+.geometric-pattern-top {
+  top: 35%;
+  right: 10%;
+}
+
+/* BOTTOM LAYER geometric pattern */
+.geometric-pattern-bottom {
+  bottom: 35%;
+  left: 10%;
+}
+
+/* Mobile responsiveness - simpler, more subtle on mobile */
+@media (max-width: 768px) {
+  /* Reduce size and complexity on mobile for performance */
+  .diagonal-line {
+    opacity: 0.05;
+  }
+
+  .radial-gradient {
+    width: 500px;
+    height: 500px;
+    opacity: 0.04;
+    filter: blur(40px);
+  }
+
+  .geometric-pattern {
+    width: 250px;
+    height: 250px;
+    opacity: 0.03;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .accent-element {
+    transform: none !important;
+    will-change: auto;
+  }
+}
