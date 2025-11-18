@@ -143,8 +143,7 @@ Following [Conventional Commits](https://www.conventionalcommits.org/):
 MIT
 
 ## 👤 Author
-
-[Your Name]
+Max Mendes
 
 ---
 
