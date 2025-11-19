@@ -24,7 +24,7 @@ Modern, upscale restaurant aesthetic featuring:
 
 ## 📋 Features
 
-- [x] Landing page foundation
+- [ ] Landing page foundation
 - [ ] Hero section with CTA
 - [ ] Menu showcase with filtering
 - [ ] Image gallery
@@ -146,5 +146,3 @@ MIT
 Max Mendes
 
 ---
-
-**Status:** 🚧 In Development
