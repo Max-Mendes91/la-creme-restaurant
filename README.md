@@ -1,54 +1,42 @@
-# La Crème Restaurant
+# La Creme - Restaurant Landing Page Template
 
-> Elegant French restaurant landing page with integrated reservation system
+A modern, production-ready landing page template for upscale restaurants. Built with React, Tailwind CSS v4, and Vite.
 
-![Tech Stack](https://img.shields.io/badge/React-18-blue)
-![Vite](https://img.shields.io/badge/Vite-5-purple)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-cyan)
+![Preview](public/images/hero/hero-bg-1200w.webp)
 
-## 🎨 Design
+## Features
 
-Modern, upscale restaurant aesthetic featuring:
-- Black background (#0a0a0a) with gold accents (#d4af37)
-- Custom typography: Playfair Display (serif) + Inter (sans-serif)
-- Mobile-first responsive design
-- Smooth animations and transitions
+- **Elegant Design** - Dark theme with gold accents, Playfair Display + Inter typography
+- **Menu Showcase** - Categorized menu with food photography and filtering
+- **Image Gallery** - Grid layout with lightbox modal
+- **Reservation System** - Full booking form with EmailJS integration
+- **Contact Section** - Location map, hours, and contact info
+- **Scrolling Golden Accent** - Decorative scroll-following effect
+- **Responsive** - Mobile-first design, works on all devices
+- **Optimized Images** - WebP with responsive srcsets (400w, 800w, 1200w)
+- **Accessibility** - WCAG 2.1 AA, keyboard navigation, ARIA labels
 
-## 🚀 Tech Stack
+## Tech Stack
 
-- **React 18** - UI library
-- **Vite** - Build tool
-- **Tailwind CSS v4** - Styling (CSS-first configuration)
-- **React Router** (planned) - Navigation
-- **Axios** (planned) - API integration
+- **React 19** - UI library
+- **Vite 7** - Build tool
+- **Tailwind CSS v4** - Styling (CSS-first `@theme` configuration)
+- **EmailJS** - Reservation email notifications
+- **PropTypes** - Runtime type checking
 
-## 📋 Features
-
-- [ ] Landing page foundation
-- [ ] Hero section with CTA
-- [ ] Menu showcase with filtering
-- [ ] Image gallery
-- [ ] Reservation form with validation
-- [ ] Contact section with map
-- [ ] Mobile-responsive design
-- [ ] Accessibility (WCAG 2.1 AA)
-
-## 🛠️ Development Setup
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
+## Quick Start
 
 ```bash
 # Clone repository
-git clone https://github.com/YOUR_USERNAME/la-creme-restaurant.git
+git clone https://github.com/Max-Mendes91/la-creme-restaurant.git
 cd la-creme-restaurant
 
 # Install dependencies
 npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your EmailJS credentials
 
 # Start development server
 npm run dev
@@ -56,93 +44,89 @@ npm run dev
 
 Visit `http://localhost:5173`
 
-### Build for Production
+## Scripts
 
 ```bash
-npm run build
-npm run preview
+npm run dev              # Start dev server
+npm run build            # Production build
+npm run preview          # Preview production build
+npm run lint             # Run ESLint
+npm run optimize-images  # Generate responsive image variants
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-src/
-├── components/
-│   ├── common/          # Reusable UI components
-│   ├── layout/          # Header, Footer, Layout
-│   ├── sections/        # Landing page sections
-│   └── reservation/     # Reservation system
-├── pages/               # Page components
-├── hooks/               # Custom React hooks
-├── services/            # API calls
-├── utils/               # Helper functions
-├── constants/           # Static data
-└── assets/              # Images, icons
+la-creme-restaurant/
+├── public/
+│   └── images/                  # Optimized responsive images
+│       ├── hero/                # Hero background (400w, 800w, 1200w)
+│       └── menu/                # Menu items by category
+│           ├── appetizers/
+│           ├── mains/
+│           └── desserts/
+├── scripts/
+│   └── optimize-images.js       # Image optimization utility
+├── src/
+│   ├── components/
+│   │   ├── common/              # Reusable UI (Button, Input)
+│   │   ├── effects/             # Visual effects (ScrollingGoldenAccent)
+│   │   ├── layout/              # Header, Footer, Layout
+│   │   ├── reservation/         # Reservation form
+│   │   └── sections/            # Page sections (Hero, Menu, Gallery, Contact)
+│   ├── constants/               # Menu data, gallery config
+│   ├── context/                 # React context (PreOrder)
+│   ├── hooks/                   # Custom hooks (scroll, intersection, reservation)
+│   ├── services/                # API/EmailJS integration
+│   ├── App.jsx                  # Root component
+│   ├── main.jsx                 # Entry point
+│   └── index.css                # Global styles + Tailwind v4 theme
+├── .env.example                 # Environment variables template
+├── EMAILJS_SETUP.md             # EmailJS configuration guide
+└── README.md
 ```
 
-## 🎨 Tailwind v4 Configuration
+## Customization
 
-This project uses Tailwind CSS v4, which has a different configuration approach:
+### Colors
 
-- Theme defined in `src/index.css` using `@theme` directive
-- Custom colors available as utility classes
-- Component classes defined in `@layer components`
+Edit `src/index.css` theme variables:
 
-### Custom Colors
-
-```jsx
-// Use in JSX
-<div className="bg-primary-black text-primary-gold">
-  <h1 className="text-accent-white">La Crème</h1>
-</div>
+```css
+@theme {
+  --color-primary-black: #0a0a0a;
+  --color-primary-gold: #d4af37;
+  --color-primary-cream: #f5f5dc;
+  --color-accent-white: #fafafa;
+  --color-accent-gray: #1a1a1a;
+}
 ```
 
-## 🔧 Path Aliases
+### Menu Items
 
-Clean imports configured in `vite.config.js`:
+Edit `src/constants/menu.js` to update dishes, descriptions, and prices.
 
-```javascript
-import Button from '@/components/common/Button'
-import { useReservation } from '@hooks/useReservation'
-```
+### Images
 
-## 🌿 Git Workflow
+Replace images in `public/images/` and run `npm run optimize-images` to generate responsive variants.
 
-```bash
-# Feature development
-git checkout develop
-git checkout -b feature/component-name
+### Reservation System
 
-# Work on feature...
-git add .
-git commit -m "feat: add component description"
+See [EMAILJS_SETUP.md](./EMAILJS_SETUP.md) for full EmailJS configuration.
 
-# Push and create PR
-git push origin feature/component-name
-```
+## Deployment
 
-## 🚀 Deployment
+Deploy to [Vercel](https://vercel.com):
 
-Deployed on [Vercel](https://vercel.com):
-- Main branch → Production
-- Feature branches → Preview deployments
+1. Push to GitHub
+2. Import repository in Vercel
+3. Add environment variables from `.env.example`
+4. Deploy
 
-## 📝 Commit Convention
-
-Following [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `style:` - CSS/formatting changes
-- `refactor:` - Code restructure
-- `docs:` - Documentation only
-- `chore:` - Dependencies, config
-
-## 📄 License
+## License
 
 MIT
 
-## 👤 Author
-Max Mendes
+## Author
 
----
+Max Mendes
