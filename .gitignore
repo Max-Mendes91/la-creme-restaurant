@@ -45,14 +45,12 @@ coverage/
 *.bak
 *~
 
-# AI/Personal documentation (not for production repo)
+# AI/IDE config
+.cursorrules
+
+# Personal documentation
 QUICK_START.md
 QUICK_FIX.md
 TAILWIND_V4_GUIDE.md
 *_NOTES.md
 CURSOR_*.md
-
-# Optional: Uncomment if you don't want these in repo
-# PROJECT.md
-# FOLDER_STRUCTURE.md
-# .cursorrules
